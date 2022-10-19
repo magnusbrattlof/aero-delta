@@ -1,12 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -18,9 +14,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "~components": ["components"],
+      "~containers": ["containers"],
+      "~hooks": ["hooks"],
+      "~helpers": ["helpers"],
+      "~api": ["api"],
+      "~constants": ["constants"],
+      "~contexts": ["contexts"],
+      "~api/queries": ["api/queries"],
+      "~api/mutations": ["api/mutations"]
+    }
+  }
 }
