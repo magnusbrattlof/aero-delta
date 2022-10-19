@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Box, { BoxProps } from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import { useWindowSize } from "~hooks";
 
 interface Props {
   open: boolean;
@@ -8,14 +9,16 @@ interface Props {
   setMenu: (open: boolean) => void;
 }
 
-const BoxComponent = styled(Box)<BoxProps>(() => ({
-  width: "auto",
-  height: "50vh",
-  padding: "16px",
-  "@media (max-width:780px)": {
-    height: "80vh",
-  },
-}));
+const BoxComponent = styled(Box)<BoxProps & { deviceHeight: number }>(
+  (props) => ({
+    width: "auto",
+    height: "50vh",
+    padding: "16px",
+    "@media (max-width:780px)": {
+      height: `calc(${props.deviceHeight}px - 30vh)`,
+    },
+  })
+);
 
 export const MenuComponent = ({ children, open, setMenu }: Props) => {
   const toggleDrawer =
@@ -30,9 +33,12 @@ export const MenuComponent = ({ children, open, setMenu }: Props) => {
       setMenu(state);
     };
 
+  const { windowSize } = useWindowSize();
+
   return (
     <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
       <BoxComponent
+        deviceHeight={windowSize.height}
         role="presentation"
         onClick={() => toggleDrawer(false)}
         onKeyDown={() => toggleDrawer(false)}

@@ -10,8 +10,7 @@ interface AirlabsResponse {
 const searchAirport = async (query: string): Promise<Airport[] | undefined> => {
   const params = new URLSearchParams([
     ["q", query],
-    ["api_key", API_KEY],
-    ["lang", "US"],
+    ["api_key", API_KEY ?? ""],
   ]);
   const { data } = await API().get<AirlabsResponse>("", { params });
   return data.response.airports;

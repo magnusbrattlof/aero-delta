@@ -8,6 +8,8 @@ import {
 import { InfoWindow } from "@react-google-maps/api";
 import { Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { GOOGLE_API_KEY } from "~constants";
+import { useWindowSize } from "~hooks";
 
 interface Props {
   markers?: Coordinate[];
@@ -38,10 +40,13 @@ export const MapComponent = ({ markers, distance }: Props) => {
       return DEFAULT_CENTER;
     }
   };
+
+  const { windowSize } = useWindowSize();
+
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDE3NMJGNZjetF_YHgrbvWjANYN7IA56aU">
+    <LoadScript googleMapsApiKey={GOOGLE_API_KEY ?? ""}>
       <GoogleMap
-        mapContainerStyle={{ height: "100vh", width: "100vw" }}
+        mapContainerStyle={{ height: windowSize.height, width: "100vw" }}
         center={calculateCenter()}
         zoom={5}
       >
